@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
  use App\Http\Controllers\TestController;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +16,7 @@ use App\Http\Controllers\TodoController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 // // Route::get('/Accueil', function () {
 // //     return view('Accueil');
@@ -45,5 +45,19 @@ use App\Http\Controllers\TodoController;
 //    return view('Todo');
 
 // });
-Route::get('/',[TodoController::class,'indix']);
-Route::post('/add',[TodoController::class,'add']);
+// Route::get('/',[TodoController::class,'indix']);
+// Route::post('/add',[TodoController::class,'add']);
+
+
+Route::get('/',[PostController::class,'index'])->name('home');
+Route::post('/addForm',[PostController::class,'store'])->name('add');
+
+Route::get('/addForm', function () {
+   return view('add');
+ });
+
+
+
+ Route::get('/detail/{post}', [PostController::class,'show'])->name('detail');
+ Route::get('/update/{post}', [PostController::class,'update'])->name('update');
+Route::get('/update/{post}/edit', [PostController::class,'edit'])->name('update');

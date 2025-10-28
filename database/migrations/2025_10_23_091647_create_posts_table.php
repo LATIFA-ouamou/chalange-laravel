@@ -16,10 +16,11 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title');
            
-            
+              $table->foreignId('user_id')->constrained()->onDelete('cascade'); // clé étrangère
              $table->text('content');
              $table->string('status')->default("draft");
              $table->string('author');
+
 
 
 

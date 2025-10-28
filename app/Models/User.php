@@ -22,6 +22,10 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+public function posts()//POUR one to many
+{
+    return $this->hasMany(post::class);
+}
 
     /**
      * The attributes that should be hidden for serialization.
@@ -32,6 +36,10 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+public function profile()
+{
+    return $this->hasOne(Profile::class);
+}
 
     /**
      * The attributes that should be cast.

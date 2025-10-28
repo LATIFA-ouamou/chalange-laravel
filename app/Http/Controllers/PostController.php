@@ -11,35 +11,64 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-         $post = post::all();
-         return view('home', ['post' =>$post  ]);
-    }
+    // public function index()
+    // {
+    //     //  $post = post::all();
+    //    $post =post::with('user')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+    //      return view('home', ['post' =>$post  ]);
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-         { $validated = $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'status' => 'required',
-        'author' => 'required',
-        ]);
-        Post::create($validated);
-        return redirect()->route('home')->with('success', 'Employé ajouté avec succès.');
-    }
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
+    // public function store(Request $request)
+    // {
+    //      { $validated = $request->validate([
+    //          'user_id' => 'required|exists:users,id',
+    //         'title' => 'required',
+    //         'content' => 'required',
+    //         'status' => 'required',
+       
+    //     ]);
+    //     // Post::create($validated);
+    //     // return redirect()->route('home')->with('success', 'Employé ajouté avec succès.');
+    //     // $post = $user->posts()->create([]);
+    //      $post = Post::create( $validated );
+
+    // return response()->json($post, 201);
+    // }
+    // }
+public function index()
+{
+    
+    return $post = Post::with('user')->get();
+}
+
+/**
+ * Store a newly created resource in storage.
+ */
+public function store(Request $request)
+{
+    $validated = $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'title' => 'required',
+        'content' => 'required',
+        'status' => 'required',
+    ]);
+
+    $post = Post::create($validated);
+
+    return response()->json($post, 201);
+}
 
     /**
      * Display the specified resource.
@@ -68,11 +97,11 @@ class PostController extends Controller
         $infos = $request->validate([
             'title' => ['required'],
             'content' => ['required'],
-            'author' => ['required'],
+          
             'status' => ['required'],
         ]);
-          $post->update($infos);
-         return redirect()->route('home');
+          
+         return $post->update($infos);
 
 
     }

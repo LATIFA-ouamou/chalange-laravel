@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
  use App\Http\Controllers\TestController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,3 +61,17 @@ Route::get('/addForm', function () {
  Route::get('/detail/{post}', [PostController::class,'show'])->name('detail');
  Route::get('/update/{post}', [PostController::class,'update'])->name('update');
 Route::get('/update/{post}/edit', [PostController::class,'edit'])->name('update');
+
+
+
+
+
+
+
+
+Route::get('/register', function () {
+    return view('register');
+  });
+  
+Route::get('/register', [RegisterController::class, 'showForm'])->name('register.show');
+Route::post('/register/submit', [RegisterController::class, 'handleForm'])->name('register.submit');
